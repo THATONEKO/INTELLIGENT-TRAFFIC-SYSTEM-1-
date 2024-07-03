@@ -45,7 +45,7 @@ function MainPage() {
 
   const handleSaveLocation = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/recents/', { location: locationName });
+      const response = await axios.post('http://192.168.1.53:5000/recents/', { location: locationName });
       alert(response.data.message);
     } catch (error) {
       console.error('There was an error saving the location!', error);
@@ -129,15 +129,15 @@ function MainPage() {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.2 km away &nbsp;&nbsp;&nbsp;(19 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11:39 AM
                   </li>
                   <li className="list-group-item suggest-tab">
-                    Naleli-Sekamaneng Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;32 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Airport Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     10.6 km away &nbsp;&nbsp;&nbsp;(26 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:05 AM
                   </li>
-                  <li className="list-group-item suggest-tab">
+                  {/* <li className="list-group-item suggest-tab">
                     Moshoeshoe Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;28 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     7.3 km away (32 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:11 AM
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

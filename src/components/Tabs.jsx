@@ -17,7 +17,7 @@ const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
 
   const fetchRecentLocations = async (activetabs) => {
     try {
-      const response = await axios.get(`http://localhost:5000/${activetabs}/`);
+      const response = await axios.get(`http://192.168.1.53:5000/${activetabs}/`);
       console.log(response.data);
       setRecentLocations(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
 
   const handleDelete = async (location) => {
     try {
-      await axios.delete(`http://localhost:5000/${activeTab}/${location}`); // Replace with your Flask backend URL
+      await axios.delete(`http://192.168.1.53:5000/${activeTab}/${location}`); // Replace with your Flask backend URL
       fetchRecentLocations(activeTab); // Refresh the list after deletion
     } catch (error) {
       console.error('Error deleting location:', error);
@@ -85,7 +85,7 @@ const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
     </li>
         
       </ul>
-      <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
+      <div className="row " style={{ paddingTop: "12px" }}>
              <div className="card display-card" style={{ width: "200px" }}>
       
       <ul className="list-group list-group-flush">
