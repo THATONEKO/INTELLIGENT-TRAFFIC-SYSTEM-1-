@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, DistanceMatrixService } from '@react-google-maps/api';
 
-
-const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
+const MyGoogleMap = ({ currentLocation, destination, setLocationName, setDistances }) => {
   const mapStyles = {
     height: '400px',
     width: '100%',
   };
+
+  const [directions, setDirections] = useState(null);
+  const [center, setCenter] = useState({ lat: -29.311667, lng: 27.481389 });
 
   useEffect(() => {
     if (currentLocation && destination) {
@@ -20,21 +22,43 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
       {
         origin: currentLocation,
         destination: destination,
-        travelMode: 'DRIVING'
+        travelMode: 'DRIVING',
+        provideRouteAlternatives: true, // Request multiple routes
       },
       (result, status) => {
         if (status === 'OK') {
           setDirections(result);
-          setLocationName(`${currentLocation}  to  ${destination}`);
-         } else {
-           console.error('Directions request failed due to ' + status);
-         setLocationName('Route Not Found');
+          setLocationName(`${currentLocation} to ${destination}`);
+          calculateDistances(result.routes);
+        } else {
+          console.error('Directions request failed due to ' + status);
+          setLocationName('Route Not Found');
         }
       }
     );
   };
 
-  const [directions, setDirections] = React.useState(null);
+  const calculateDistances = (routes) => {
+    const service = new window.google.maps.DistanceMatrixService();
+    const origins = [currentLocation];
+    const destinations = routes.map(route => route.legs[0].end_location);
+
+    service.getDistanceMatrix(
+      {
+        origins,
+        destinations,
+        travelMode: 'DRIVING',
+      },
+      (response, status) => {
+        if (status === 'OK') {
+          const distances = response.rows[0].elements.map(element => element.distance.text);
+          setDistances(distances);
+        } else {
+          console.error('Distance Matrix request failed due to ' + status);
+        }
+      }
+    );
+  };
 
   return (
     <div>
@@ -42,9 +66,20 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={12}
-          center={{ lat: -29.311667, lng: 27.481389 }}
+          center={center} // Default center if no route is displayed
         >
-          {directions && <DirectionsRenderer directions={directions} />}
+          {directions && directions.routes.map((route, index) => (
+            <DirectionsRenderer
+              key={index}
+              directions={directions}
+              routeIndex={index}
+              options={{
+                polylineOptions: {
+                  strokeColor: index === 0 ? 'blue' : 'gray',
+                },
+              }}
+            />
+          ))}
         </GoogleMap>
       </LoadScript>
     </div>
@@ -52,4 +87,3 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
 };
 
 export default MyGoogleMap;
-
