@@ -45,10 +45,10 @@ const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
   // };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
       <ul
         className="list-group mg"
-        style={{ width: "200px", border: "none", borderRadius: "0%" }}
+        style={{ width: "200px", border: "none", borderRadius: "0%", paddingTop: "48px" }}
       >
         <li
           className={`list-group-item ${
@@ -67,14 +67,14 @@ const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
         >
           <IconSavedTab />&nbsp;&nbsp;&nbsp;Marked
         </li>
-        <li
+        {/* <li
           className={`list-group-item ${
             activeTab === "Traveled" ? "current-tab" : ""
           } custom-list-group`}
           onClick={() => handleTabClick("Traveled")}
         >
           <IconTraveled />&nbsp;&nbsp;&nbsp;Traveled
-        </li>
+        </li> */}
         <li
       className={`list-group-item ${
         activeTab === "Customize" ? "current-tab" : ""
