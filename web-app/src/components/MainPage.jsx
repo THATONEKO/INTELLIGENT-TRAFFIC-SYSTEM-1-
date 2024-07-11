@@ -8,6 +8,7 @@ import axios from 'axios';
 import trafficSpeedIcon from "../assets/speedometerIcon.png";
 import IconLogo from './IconLogo';
 import IconGlass from './IconGlass'
+import IconTabs from './IconTabs'
 
 const MainPage = () => {
   const [currentLocation, setCurrentLocation] = useState('');
@@ -132,7 +133,7 @@ const MainPage = () => {
                   className="btn btn-primary d-lg-none"
                   onClick={toggleTabColumn}
                 >
-                  {isTabColumnVisible ? "Hide Tabs" : "Show Tabs"}
+                  {isTabColumnVisible ? <IconTabs/> : <IconTabs/>}
                 </button>
                 <input
                   type="text"
@@ -182,7 +183,7 @@ const MainPage = () => {
             </div>
           )}
           {/* Map Column */}
-          <div className="col-lg-8 pt-5 map-col">
+          <div className="col-lg-8 pt-5 map-col" style={{ marginRight: "15px"}}>
             <div className="container-sm">
               <MyGoogleMap
                 currentLocation={currentLocation}

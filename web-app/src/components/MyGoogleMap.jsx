@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer, DistanceMatrixService } from '@react-google-maps/api';
+import "../App.css";
 
 const MyGoogleMap = ({ currentLocation, destination, setLocationName, setDistances }) => {
   const mapStyles = {
-    height: '400px',
+    height: '500px',
     width: '100%',
   };
 
