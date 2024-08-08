@@ -1,8 +1,17 @@
 body {
-  background-color: #16423f;
-  background: linear-gradient(to bottom right, white, rgba(150, 150, 150, 1), white);
+  
   height: 100vh;
   width: 100%;
+}
+
+header {
+  background-color: #288066;
+  height: 40px;
+}
+
+main {
+  background-color: #16423f;
+  background: linear-gradient(to bottom right, white, rgba(150, 150, 150, 1), white);
 }
 
 .mg {
