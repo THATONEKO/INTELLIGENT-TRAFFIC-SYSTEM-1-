@@ -2,25 +2,26 @@ from flask import Flask
 from flask_cors import CORS
 from flask_mysqldb import MySQL
 
+# Initialize MySQL
 mysql = MySQL()
 
 def create_app():
     app = Flask(__name__)
 
-    CORS(app)
-
     # Load the configuration from config.py
     app.config.from_object('config.Config')
+
+    # Initialize CORS
+    CORS(app, resources={r"/data": {"origins": "http://localhost:5173"}})
 
     # Initialize MySQL
     mysql.init_app(app)
 
-    # # Set up CORS
-    # CORS(app, resources={r"/data": {"origins": "http://localhost:5173"}})
+    # Example: Setup Clerk API key
+    clerk_api_key = app.config.get('CLERK_API_KEY')
 
-    # Register routes
+    # Register routes (assuming these exist in your application)
     from tests import recents, marked, traffic_speed, traffic_speed2, traffic_speed3, traffic_speed4
-
     app.register_blueprint(recents.bp, url_prefix='/recents')
     app.register_blueprint(marked.bp, url_prefix='/marked')
     app.register_blueprint(traffic_speed.bp, url_prefix='/traffic_speed')
