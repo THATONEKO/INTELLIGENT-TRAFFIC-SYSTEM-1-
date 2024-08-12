@@ -12,31 +12,7 @@ def create_app():
     app.config.from_object('config.Config')
 
     # Initialize CORS
-    #CORS(app, resources={r"/recents/*": {"origins": "http://localhost:5173"}})
-    CORS(app, resources={
-        r"/recents/*": {
-            "origins": "http://localhost:5173",
-            "methods": ["POST", "DELETE", "GET"],
-            "allow_headers": ["Content-Type"]
-        },
-        r"/marked/*": {
-            "origins": "http://localhost:5173",
-            "methods": ["POST", "GET", "DELETE"],
-            "allow_headers": ["Content-Type"]
-        },
-        r"/traffic_speed/*": {
-            "origins": "http://localhost:5173",
-            "methods": ["POST", "GET", "PUT"],
-            "allow_headers": ["Content-Type"]
-        },
-        r"/traffic_speed2/*": {
-            "origins": "*",
-            "methods": ["POST"],
-            "allow_headers": ["Contend-Type"]
-        }
-
-        # Add more endpoints as needed
-    })
+    CORS(app, resources={r"/data": {"origins": "http://localhost:5173"}})
 
     # Initialize MySQL
     mysql.init_app(app)

@@ -18,7 +18,7 @@ def login():
 
     # Verify token with Clerk and retrieve user information
     headers = {
-        'Authorization': f'Bearer {app.config["CLERK_API_KEY"]}',
+        'Authorization': f'Bearer {app.config["pk_test_ZGVzaXJlZC1maXNoLTEyLmNsZXJrLmFjY291bnRzLmRldiQ"]}',
         'Content-Type': 'application/json'
     }
     response = requests.post('https://api.clerk.dev/v1/tokens/verify', headers=headers, json={'token': token})

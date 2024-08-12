@@ -104,7 +104,7 @@ const MainPage = () => {
 
   const handleSaveLocation = async () => {
     try {
-      const response = await axios.post('http://192.168.1.53:5000/recents/', { location: locationName });
+      const response = await axios.post('https://h27x0zfg-5000.inc1.devtunnels.ms/recents/', { location: locationName });
       alert(response.data.message);
     } catch (error) {
       console.error('There was an error saving the location!', error);
